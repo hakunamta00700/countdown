@@ -30,6 +30,8 @@ body {
 
 .flip-clock__slot {
     font-size: 2vw;
+    font-family: 'Malgun Gothic', sans-serif;
+    color:white;
 }
 
 .card {
@@ -38,6 +40,8 @@ body {
     padding-bottom: 0.72em;
     font-size: 9vw;
     line-height: 0.95;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .card__top,
@@ -180,4 +184,24 @@ body {
         transform: rotateX(0deg);
         z-index: 5;
     }
+}
+#countdown_container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: black;
+    border-width: 1px;
+    border-color: black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#countdown {
+    margin: 5px;
+}
+
+.countdown_title {
+    font-family: 'Malgun Gothic', sans-serif;
 }

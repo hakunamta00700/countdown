@@ -3,11 +3,15 @@ function CountdownTracker(label, value) {
     var el = document.createElement("span");
 
     el.className = "flip-clock__piece";
-    el.innerHTML =
-        '<b class="flip-clock__card card"><b class="card__top"></b><b class="card__bottom"></b><b class="card__back"><b class="card__bottom"></b></b></b>' +
-        '<span class="flip-clock__slot">' +
-        label +
-        "</span>";
+    el.innerHTML = `
+<b class="flip-clock__card card">
+    <b class="card__top"></b>
+    <b class="card__bottom"></b>
+    <b class="card__back">
+        <b class="card__bottom"></b>
+    </b>
+</b>
+<span class="flip-clock__slot">${label.toUpperCase()}</span>`;
 
     this.el = el;
     var top = el.querySelector(".card__top"),
@@ -45,14 +49,36 @@ function getTimeRemaining(endtime) {
         Seconds: Math.floor((t / 1000) % 60)
     };
 }
+function pretaskForMakeCountdown(containerId) {
+    const countdownContainer = document.getElementById(containerId);
+    countdownContainer.style.display = 'flex';
+    // <span> 요소를 생성하고 필요한 스타일 및 텍스트를 설정합니다.
+    const countdownTitle = document.createElement('span');
+    countdownTitle.className = 'countdown_title';
+    countdownTitle.style.color = 'white';
+    countdownTitle.innerText = '반짝특가 남은시간';
 
-export function Clock(targetId, countdown, callback) {
+    // 새로운 <div> 요소를 생성하고 id를 'countdown_for_sale'로 설정합니다.
+    const countdownDiv = document.createElement('div');
+    countdownDiv.id = 'countdown_for_sale';
+
+    // 생성된 <span> 및 <div> 요소를 'countdown_container'에 추가합니다.
+    countdownContainer.appendChild(countdownTitle);
+    countdownContainer.appendChild(countdownDiv);
+
+    // 마지막으로 'countdown_container'를 문서의 원하는 위치에 추가합니다.
+    // 예: body의 마지막 부분에 추가
+    document.body.appendChild(countdownContainer);
+    return countdownDiv.id;
+}
+export function Clock(containerId, countdown, callback) {
+    const countdownDivId = pretaskForMakeCountdown(containerId);
     countdown = countdown ? new Date(Date.parse(countdown)) : false;
     callback = callback || function () { };
 
     var updateFn = getTimeRemaining;
 
-    this.el = document.getElementById(targetId);
+    this.el = document.getElementById(countdownDivId);
     this.el.className = "flip-clock";
 
     var trackers = {},
