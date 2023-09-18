@@ -8,13 +8,23 @@
     <script src="dist/cg_countdown.js"></script>
   </head>
   <body>
-    <div id="countdown_container" style="display:none;">      
-    </div>
+    <div id="mySpan">안녕</div>
     <script>
-      const deadline = CgCountDown.convertStringToDate("2023/09/22 15:00");
-      var c = new CgCountDown.Clock("countdown_container", deadline, function () {
-        alert("Countdown complete!");
-      });
+      function onFinishCountDown() {
+        alert("onFinished!!!");
+      }
+      const config = {
+        ElSelector: "#mySpan",
+        targetDate:
+          CgCountDown.DateTimeConverter.convertStringToDate("2023/09/18 13:10"),
+        output: `<div id="countdown_container" style="display: flex;">
+            <span class="countdown_title" style="color: white;">반짝특가 남은시간</span>
+            <div id="countdown_core"></div>
+        </div>`,
+        targetId: "countdown_core",
+        callback: onFinishCountDown
+      };
+      var c = new CgCountDown.Clock(config);
     </script>
   </body>
 </html>
