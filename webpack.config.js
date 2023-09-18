@@ -15,10 +15,24 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    require('cssnano')({ preset: 'default' })
+                                ],
+                            },
+                        },
+                    }
+                ],
             },
         ],
     },
+
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'cg_countdown.css',
